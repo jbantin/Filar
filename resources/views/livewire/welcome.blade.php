@@ -1,7 +1,7 @@
 
     <div>
         <div class="w-full flex justify-center">
-     <x-card title="Hi {{Auth::check() ? Auth::user()->name : 'unknown.'}}">
+     <x-card title="Hi {{Auth::check() ? Auth::user()->name : 'and welcome to Laranban.'}}">
         @guest
             <p>Please <a class="link-button" href="/login">login</a> or <a class="link-button" href="/register">register</a></p>
         @endguest                
