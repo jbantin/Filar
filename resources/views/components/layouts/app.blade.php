@@ -6,6 +6,7 @@
 
         <title>{{ $title ?? 'Laranban' }}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
     </head>
     <body>
         <nav class="flex justify-evenly py-4">
