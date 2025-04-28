@@ -28,6 +28,7 @@ class Register extends Component
             'password' => $this->password,
         ]);
         $this->reset();
+        return $this->redirect('/login', navigate: true);
     }
     public function render()
     {

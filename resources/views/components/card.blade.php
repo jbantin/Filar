@@ -1,8 +1,6 @@
-<div class="bg-white shadow-md rounded-lg p-6 my-4 mx-8 max-w-2xl justify-center">
+<div class="bg-gray-100 shadow-md rounded-md p-4 my-4 mx-4 max-w-xl">
     @if(isset($title))
-        <h2 class="text-xl font-semibold mb-4">{{ $title }}</h2>
-        @else
-        <h2 class="text-xl font-semibold mb-4">Card</h2>
+        <h2 class="text-xl font-semibold mb-4 break-words block">{{ $title }}</h2>        
     @endif
     {{$slot}}
 </div>
