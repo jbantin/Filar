@@ -1,5 +1,3 @@
-Markdown
-
 # Filar
 
 Filar is a simple Kanban-style to-do list application built using Laravel. This project serves as my first Laravel application and is designed to help organize tasks visually in a Kanban format.
