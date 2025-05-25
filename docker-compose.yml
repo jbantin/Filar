@@ -14,7 +14,8 @@ services:
     networks:
       - laravel
     command: >
-      sh -c "chown -R www-data:www-data /var/www/storage /var/www/database /var/www/bootstrap/cache &&
+      sh -c "composer install &&
+             chown -R www-data:www-data /var/www/storage /var/www/database /var/www/bootstrap/cache &&
              chmod -R 775 /var/www/storage /var/www/database /var/www/bootstrap/cache &&
              php-fpm"
 
