@@ -15,8 +15,11 @@ services:
       - laravel
     command: >
       sh -c "composer install &&
+             mkdir -p /var/www/database &&
+             touch /var/www/database/database.sqlite &&
              chown -R www-data:www-data /var/www/storage /var/www/database /var/www/bootstrap/cache &&
              chmod -R 775 /var/www/storage /var/www/database /var/www/bootstrap/cache &&
+             php artisan migrate --force &&
              php-fpm"
 
   webserver:
