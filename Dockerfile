@@ -1,24 +1,29 @@
-FROM php:8.2-fpm
+# Use multi-stage build for better optimization
+FROM node:18-alpine AS node-builder
 
-# Install system dependencies including Node.js
-RUN apt-get update && apt-get install -y \
+WORKDIR /app
+COPY package*.json ./
+# Install ALL dependencies (including dev) for building
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Main PHP image
+FROM php:8.2-fpm-alpine
+
+# Install system dependencies in one layer
+RUN apk add --no-cache \
     git \
     curl \
     libpng-dev \
-    libonig-dev \
+    oniguruma-dev \
     libxml2-dev \
     zip \
     unzip \
-    sqlite3 \
-    libsqlite3-dev \
-    nodejs \
-    npm
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_sqlite mbstring exif pcntl bcmath gd
+    sqlite \
+    sqlite-dev \
+    && docker-php-ext-install pdo_sqlite mbstring exif pcntl bcmath gd \
+    && rm -rf /var/cache/apk/*
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -26,32 +31,26 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy existing application directory contents
-COPY . /var/www/
+# Copy composer files first for better layer caching
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction
 
-# Install dependencies
-RUN composer install
+# Copy application code
+COPY . .
 
-# Install NPM dependencies and build assets
-RUN npm install
-RUN npm run build
+# Copy built assets from node-builder stage
+COPY --from=node-builder /app/public/build ./public/build
 
-# Create SQLite database directory and file
-RUN mkdir -p /var/www/database
-RUN touch /var/www/database/database.sqlite
+# Run composer scripts after copying all files
+RUN composer run-script post-autoload-dump
 
-# Create storage directories and set permissions
-RUN mkdir -p /var/www/storage/framework/views
-RUN mkdir -p /var/www/storage/framework/cache/data
-RUN mkdir -p /var/www/storage/framework/sessions
-RUN mkdir -p /var/www/storage/logs
+# Create directories and set permissions in one layer
+RUN mkdir -p storage/framework/{views,cache/data,sessions} \
+    storage/logs \
+    database \
+    && touch database/database.sqlite \
+    && chown -R www-data:www-data /var/www \
+    && chmod -R 775 storage database bootstrap/cache
 
-# Change ownership of our applications
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 775 /var/www/storage
-RUN chmod -R 775 /var/www/database
-RUN chmod -R 775 /var/www/bootstrap/cache
-
-# Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
