@@ -10,6 +10,7 @@ services:
     working_dir: /var/www
     volumes:
       - .:/var/www
+      - build_assets:/var/www/public/build
       - ./database:/var/www/database
     networks:
       - laravel
@@ -18,6 +19,8 @@ services:
       - APP_DEBUG=true
     command: >
       sh -c "composer install --no-dev --optimize-autoloader &&
+             npm install &&
+             npm run build &&
              mkdir -p /var/www/database &&
              touch /var/www/database/database.sqlite &&
              chown -R www-data:www-data /var/www/storage /var/www/database /var/www/bootstrap/cache &&
@@ -34,6 +37,7 @@ services:
       - "2423:80"
     volumes:
       - .:/var/www
+      - build_assets:/var/www/public/build
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - laravel
@@ -41,3 +45,6 @@ services:
 networks:
   laravel:
     driver: bridge
+
+volumes:
+  build_assets:
