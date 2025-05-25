@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-# Install system dependencies
+# Install system dependencies including Node.js
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -10,12 +10,14 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     sqlite3 \
-    libsqlite3-dev
+    libsqlite3-dev \
+    nodejs \
+    npm
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions (replace pdo_mysql with pdo_sqlite)
+# Install PHP extensions
 RUN docker-php-ext-install pdo_sqlite mbstring exif pcntl bcmath gd
 
 # Get latest Composer
@@ -29,6 +31,10 @@ COPY . /var/www/
 
 # Install dependencies
 RUN composer install
+
+# Install NPM dependencies and build assets
+RUN npm install
+RUN npm run build
 
 # Create SQLite database directory and file
 RUN mkdir -p /var/www/database
