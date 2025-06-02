@@ -7,6 +7,8 @@ use App\Models\Tasks;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Dates;
 
 class User extends Authenticatable
 {
@@ -50,5 +52,9 @@ class User extends Authenticatable
     public function tasks()
     {
         return $this->hasMany(Tasks::class);
+    }
+    public function dates()
+    {
+        return $this->hasMany(Dates::class);
     }
 }
