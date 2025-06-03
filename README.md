@@ -1,19 +1,41 @@
 # Filar
 
-Filar is a simple Kanban-style to-do list application built using Laravel. This project serves as my first Laravel application and is designed to help organize tasks visually in a Kanban format.
+Filar is a comprehensive productivity application built using Laravel. This project serves as my first Laravel application and is designed to help organize tasks, dates, and notes in an intuitive interface.
 
 ## Features
 
-- Create, update, and delete tasks.
-- Organize tasks into columns for better workflow management.
-- Clean and responsive design using Tailwind CSS.
+### Tasks Management
+- Create, update, and delete tasks
+- Organize tasks into Kanban-style columns (Pending, In Progress, Completed)
+- Move tasks between different status columns
+- Clean and responsive design using Tailwind CSS
+
+### Dates Management
+- Create and manage important dates with optional time
+- Add titles and descriptions to dates
+- View dates in a card-based layout
+- Edit and delete existing dates
+- Time-based scheduling support
+
+### Notes Management
+- Create, edit, and delete personal notes
+- Simple text-based note storage
+- Organize notes chronologically
+- Full CRUD operations for note management
+
+### User Authentication
+- User registration and login system
+- Secure user sessions
+- Personal data isolation (users only see their own content)
 
 ## Technologies Used
 
 - **PHP** (Primary language)
 - **Laravel** (Backend framework)
+- **Livewire** (Dynamic frontend components)
 - **Tailwind CSS** (Frontend styling)
 - **SQLite** (Database)
+- **Blade Templates** (Laravel templating engine)
 
 ## Installation
 
@@ -45,6 +67,11 @@ bash
 
 php artisan migrate
 
+(Optional) Seed the database with sample data:
+bash
+
+php artisan db:seed
+
 Start the development server:
 bash
 
@@ -52,10 +79,37 @@ bash
 
     Access the app in your browser at http://localhost:8000.
 
-Usage
+## Database Structure
 
-    Add tasks to different columns to organize your workflow.
-    Drag and drop tasks to move them between columns (if implemented).
+The application uses the following main tables:
+- **users** - User authentication and profile information
+- **tasks** - Task management with status tracking
+- **dates** - Date entries with optional time and descriptions
+- **notes** - Simple text-based note storage
+
+All user data is properly isolated to ensure privacy and security.
+
+## Usage
+
+### Getting Started
+1. Register a new account or login with existing credentials
+2. Access the dashboard to view all your tasks, dates, and notes
+
+### Tasks Management
+- Add new tasks using the form on the dashboard
+- Move tasks between columns (Pending → In Progress → Completed)
+- Delete tasks when no longer needed
+
+### Dates Management
+- Navigate to the "Dates" section from the navigation menu
+- Create new dates with optional time specifications
+- Add titles and descriptions for better organization
+- Edit or delete existing dates as needed
+
+### Notes Management
+- Access the "Notes" section to manage your personal notes
+- Create simple text-based notes for quick reference
+- Edit and organize notes chronologically
 
 Contributing
 
