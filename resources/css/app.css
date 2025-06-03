@@ -18,7 +18,7 @@
     }
 
     .link-button {
-        @apply py-2 px-4 rounded-lg font-bold hover:bg-gray-100 transition border-2 border-gray-400
+        @apply py-1 px-2 rounded-lg font-bold hover:bg-gray-100 transition border-2 border-gray-400
     }
 }
 

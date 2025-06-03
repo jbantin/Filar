@@ -1,6 +1,5 @@
-
-<!-- filepath: resources/views/dates/index.blade.php -->
-<x-app-layout>
+<!-- filepath: /home/sackler/Desktop/projects/php/Filar/resources/views/dates/index.blade.php -->
+<x-layouts.app>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="px-4 py-6 sm:px-0">
             <div class="flex justify-between items-center mb-6">
@@ -24,9 +23,16 @@
                                 <h3 class="text-lg font-semibold text-gray-900">
                                     {{ $date->title ?: 'Untitled' }}
                                 </h3>
-                                <span class="text-sm text-gray-500">
-                                    {{ $date->date->format('M j, Y') }}
-                                </span>
+                                <div class="text-right">
+                                    <span class="text-sm text-gray-500 block">
+                                        {{ $date->date->format('M j, Y') }}
+                                    </span>
+                                    @if($date->time)
+                                        <span class="text-xs text-gray-400">
+                                            {{ $date->time->format('g:i A') }}
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                             
                             @if($date->description)
@@ -64,4 +70,4 @@
             @endif
         </div>
     </div>
-</x-app-layout>
+</x-layouts.app>

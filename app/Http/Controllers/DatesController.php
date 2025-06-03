@@ -21,6 +21,7 @@ class DatesController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
+            'time' => 'nullable|date_format:H:i',
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
         ]);
@@ -51,6 +52,7 @@ class DatesController extends Controller
 
         $request->validate([
             'date' => 'required|date',
+            'time' => 'nullable|date_format:H:i',
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
         ]);

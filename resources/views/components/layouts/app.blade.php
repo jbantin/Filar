@@ -11,13 +11,15 @@
     <body class="bg-bg-primary text-text-primary">
         <h3 class="text-3xl font-extrabold text-center py-2">Laranban v0.1</h3>
         <nav class="flex justify-evenly py-4">
-            <a class="link-button" href="/" class="text-blue-500">Home</a>
             @guest
-                <a class="link-button" href="/login">Login</a>
-                <a class="link-button" href="/register">Register</a>
-            @else
                 
-                <a class="link-button" href="/logout">Logout</a>
+            @else
+
+            
+            <a class="link-button" href="/">Tasks</a>
+            <a class="link-button" href="{{ route('dates.index')}}">Dates</a>
+            <a class="link-button" href="{{ route('notes.index')}}">Notes</a>
+            <a class="link-button" href="/logout">Logout</a>
             @endguest            
         </nav>
         {{ $slot }}

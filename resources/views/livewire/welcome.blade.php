@@ -1,9 +1,10 @@
 <!-- filepath: /home/sackler/Desktop/projects/php/Filar/resources/views/livewire/welcome.blade.php -->
-<div>
+<div class="px-12">
     <div class="w-full flex justify-center">
         <x-card title="Hi {{Auth::check() ? Auth::user()->name : 'and welcome to Laranban.'}}">
             @guest
-                <p class="mt-4">Please <a class="link-button" href="/login">login</a> or <a class="link-button" href="/register">register</a></p>
+                <p class="my-4 font-bold">Please <a class="link-button" href="/login">login</a> or <a class="link-button" href="/register">register</a></p>
+                <p class="font-bold">for your tasks,dates and notes.</p>
             @endguest                
         </x-card>
     </div>
@@ -106,62 +107,7 @@
             </div>
         </div>
     </div>
-    <!-- Dates Section -->
-    <div class="mt-8 mx-4">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">My Dates</h2>
-            <a href="{{ route('dates.create') }}" class="btn-primary">
-                Add New Date
-            </a>
-        </div>
-
-        @if($dates && $dates->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                @foreach($dates->take(6) as $date)
-                    <div class="bg-card-bg rounded-lg shadow p-4">
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="text-lg font-semibold text-gray-900">
-                                {{ $date->title ?: 'Untitled' }}
-                            </h3>
-                            <span class="text-sm text-gray-500">
-                                {{ $date->date->format('M j') }}
-                            </span>
-                        </div>
-                        
-                        @if($date->description)
-                            <p class="text-gray-600 mb-3 text-sm">
-                                {{ Str::limit($date->description, 80) }}
-                            </p>
-                        @endif
-
-                        <div class="flex space-x-2">
-                            <a href="{{ route('dates.show', $date) }}" class="link-button text-xs">
-                                View
-                            </a>
-                            <a href="{{ route('dates.edit', $date) }}" class="btn-primary">
-                                Edit
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            
-            @if($dates->count() > 6)
-                <div class="text-center">
-                    <a href="{{ route('dates.index') }}" class="link-button">
-                        View All Dates ({{ $dates->count() }})
-                    </a>
-                </div>
-            @endif
-        @else
-            <div class="text-center py-8 bg-card-bg rounded-lg">
-                <p class="text-gray-500 mb-4">No dates found.</p>
-                <a href="{{ route('dates.create') }}" class="btn-primary">
-                    Create Your First Date
-                </a>
-            </div>
-        @endif
-    </div>
+   
 
     @endauth
 </div>

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Dates;
+use App\Models\Note;
 
 class User extends Authenticatable
 {
@@ -56,5 +57,9 @@ class User extends Authenticatable
     public function dates()
     {
         return $this->hasMany(Dates::class);
+    }
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
     }
 }

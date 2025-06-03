@@ -1,5 +1,5 @@
-
-<x-app-layout>
+<!-- filepath: /home/sackler/Desktop/projects/php/Filar/resources/views/dates/create.blade.php -->
+<x-layouts.app>
     <div class="max-w-2xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="px-4 py-6 sm:px-0">
             <div class="mb-6">
@@ -9,17 +9,31 @@
             <form action="{{ route('dates.store') }}" method="POST" class="space-y-6">
                 @csrf
                 
-                <div>
-                    <label for="date" class="form-label">Date *</label>
-                    <input type="date" 
-                           id="date" 
-                           name="date" 
-                           value="{{ old('date') }}"
-                           class="form-input @error('date') border-red-500 @enderror" 
-                           required>
-                    @error('date')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="date" class="form-label">Date *</label>
+                        <input type="date" 
+                               id="date" 
+                               name="date" 
+                               value="{{ old('date') }}"
+                               class="form-input @error('date') border-red-500 @enderror" 
+                               required>
+                        @error('date')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="time" class="form-label">Time</label>
+                        <input type="time" 
+                               id="time" 
+                               name="time" 
+                               value="{{ old('time') }}"
+                               class="form-input @error('time') border-red-500 @enderror">
+                        @error('time')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 <div>
@@ -58,4 +72,4 @@
             </form>
         </div>
     </div>
-</x-app-layout>
+</x-layouts.app>

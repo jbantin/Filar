@@ -1,6 +1,5 @@
-
-<!-- filepath: resources/views/dates/show.blade.php -->
-<x-app-layout>
+<!-- filepath: /home/sackler/Desktop/projects/php/Filar/resources/views/dates/show.blade.php -->
+<x-layouts.app>
     <div class="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="px-4 py-6 sm:px-0">
             <div class="bg-card-bg rounded-lg shadow p-8">
@@ -11,6 +10,9 @@
                         </h1>
                         <p class="text-lg text-gray-600">
                             {{ $date->date->format('F j, Y') }}
+                            @if($date->time)
+                                at {{ $date->time->format('g:i A') }}
+                            @endif
                             <span class="text-sm text-gray-500 ml-2">
                                 ({{ $date->date->diffForHumans() }})
                             </span>
@@ -58,4 +60,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-layouts.app>
