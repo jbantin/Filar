@@ -22,6 +22,10 @@ services:
              npm run build &&
              chown -R www-data:www-data /var/www/storage /var/www/database /var/www/bootstrap/cache &&
              chmod -R 775 /var/www/storage /var/www/database /var/www/bootstrap/cache &&
+             # Ensure SQLite database file is owned by www-data and writable
+             touch /var/www/database/database.sqlite &&
+             chown www-data:www-data /var/www/database/database.sqlite &&
+             chmod 664 /var/www/database/database.sqlite &&
              php-fpm"
 
   webserver:
