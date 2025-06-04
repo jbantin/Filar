@@ -18,7 +18,7 @@
                         <a href="{{ route('notes.edit', $note) }}" class="btn-primary">
                             Edit
                         </a>
-                        <form action="{{ route('notes.destroy', $note) }}" method="POST" class="inline">
+                        <form action="/notes/{{ $note->id }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn-secondary" 

@@ -23,7 +23,7 @@
                         <a href="{{ route('dates.edit', $date) }}" class="btn-primary">
                             Edit
                         </a>
-                        <form action="{{ route('dates.destroy', $date) }}" method="POST" class="inline">
+                        <form action="/dates/{{ $date->id }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn-secondary" 

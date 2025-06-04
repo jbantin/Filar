@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-bold text-gray-900">Edit Date</h1>
             </div>
 
-            <form action="{{ route('dates.update', $date) }}" method="POST" class="space-y-6">
+            <form action="/dates/{{ $date->id }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
                 

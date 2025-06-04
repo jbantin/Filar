@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-bold text-gray-900">Add New Date</h1>
             </div>
 
-            <form action="{{ route('dates.store') }}" method="POST" class="space-y-6">
+            <form action="/dates" method="POST" class="space-y-6">
                 @csrf
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

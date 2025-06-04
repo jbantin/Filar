@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-bold text-gray-900">Edit Note</h1>
             </div>
 
-            <form action="{{ route('notes.update', $note) }}" method="POST" class="space-y-6">
+            <form action="/notes/{{ $note->id }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
                 

@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-bold text-gray-900">Add New Note</h1>
             </div>
 
-            <form action="{{ route('notes.store') }}" method="POST" class="space-y-6">
+            <form action="/notes" method="POST" class="space-y-6">
                 @csrf
                 
                 <div>
